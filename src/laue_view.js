@@ -15,8 +15,8 @@ var screen_height = 100//mm
 const canvasContainer = document.getElementById('laue-canvas-container')
 const canvas = canvasContainer.getElementsByTagName('canvas')[0];
 const context = canvas.getContext('2d');
-canvas.width = canvas.clientWidth;
-canvas.height = canvas.clientHeight; 
+canvas.width = canvasContainer.clientWidth;
+canvas.height = canvasContainer.clientHeight; 
 mid_x = canvas.width/2;
 mid_y = canvas.height/2;
 
@@ -42,14 +42,23 @@ let highlightedHKL = []
 let currentlySelectedHKL = undefined
 
 
-window.onresize = () => {
+/*window.onresize = () => {
     alert("updating")
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
     mid_x = canvas.width/2;
     mid_y = canvas.height/2;
     updateCanvas();
-}
+}*/
+
+window.addEventListener('resize', event => {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+    mid_x = canvas.width/2;
+    mid_y = canvas.height/2;
+    updateCanvas();
+});
+
 
 
 //changes the size based on intensity

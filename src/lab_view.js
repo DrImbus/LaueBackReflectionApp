@@ -46,23 +46,40 @@ camera_pivot.rotateOnWorldAxis(new Vector3(0,0,1), Math.PI/180 * (90+45+30));
 //create renderer
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setClearColor('#233143');
-renderer.setSize(container.clientWidth, container.clientHeight);
+//renderer.setSize(container.clientWidth, container.clientHeight);
 
 container.appendChild(renderer.domElement);
 
+const canvas = renderer.domElement;
+
+canvas.style.width = "100%";
+canvas.style.height = "100%";
 
 //in case of window resizing set the correct camera aspect
 window.addEventListener('resize', () => {
-
-    renderer.setSize(container.clientWidth, container.clientHeight, false);
+    //renderer.setSize(renderer.clientWidth, renderer.clientHeight, true);
+    
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
-})
 
+    
+ 
+    //container.width = container.clientWidth
+    //container.height = container.clientHeight
+
+
+    console.log(`before: ${container.clientHeight}`)
+    
+    //renderer.setSize(canvas.clientWidth,canvas.clientHeight, false);
+
+    console.log(`after: ${container.clientHeight}`)
+
+})
 
 
 //render loop
 const rendering = function(){   
+    
     requestAnimationFrame(rendering);
     
     //rotate the entire scene
