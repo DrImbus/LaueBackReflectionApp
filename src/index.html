@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Laue Pattern Prediction</title>
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="contrast_function.css">
+    </head>
+    <body>
+        <div id="ui-container">
+            <button class="section-headline">
+                Lab Settings
+            </button>
+            <div class="input-section">
+                <div class="input-container">
+                    <span class="input-name">&#934;: </span>
+                    <input type="number" value="0" id="x-rotation">
+                    <span class="input-unit">&#176;</span>
+                </div>
+                <div class="input-container">
+                    <span class="input-name">&#935;: </span>
+                    <input type="number" value="0" id="y-rotation">
+                    <span class="input-unit">&#176;</span>
+                </div>
+                <div class="input-container">
+                    <span class="input-name">&#937;: </span>
+                    <input type="number" value="0" id="z-rotation">
+                    <span class="input-unit">&#176;</span>
+                </div>
+                <div class="input-container">
+                    <span></span>
+                    <button id="reset-orientation" style="width:81px; max-width:100px">Reset</button>
+                </div>
+                <div class="input-container">
+                    <span></span>
+                    <button id="randomize-orientation" style="width:81px; max-width:100px">Randomize</button>
+                </div>
+                <div class="input-container">
+                    <span class="input-name">D<sub>screen</sub>: </span>
+                    <input type="number" value="30" id="screen-distance">
+                    <span class="input-unit">mm</span>
+                </div>
+                <div class="input-container">
+                    <span class="input-name">Screen Width: </span>
+                    <input type="number" value="113" id="screen-width">
+                    <span class="input-unit">mm</span>
+                </div>
+                <div class="input-container">
+                    <span class="input-name">Screen Height: </span>
+                    <input type="number" value="143" id="screen-height">
+                    <span class="input-unit">mm</span>
+                </div>
+                <div class="input-container">
+                    <span class="input-name">Aperture-Radius: </span>
+                    <input type="number" value="5" id="cutout-radius">
+                    <span class="input-unit">mm</span>
+                </div>
+                <div class="input-container">
+                    <span class="input-name">U<sub>acc</sub></span>
+                    <input type="number" value="20" id="voltage-input">
+                    <span class="input-unit">kV</span>
+                </div>
+                <div class="input-container">
+                    <span class="inpu20t-name">&#955;<sub>min</sub></span>
+                    <input type="number" id="wavelength-input">
+                    <span class="input-unit">pm</span>
+                </div>
+            </div>
+        
+            <button class="section-headline">
+                Lattice Paramters
+            </button>
+            <div class="input-section" id="lattice-constants">
+                
+                <div class="input-container file-container">
+                    <label for="cif-upload" id="cif-upload-label">
+                        Upload Cif
+                    </label>
+                    <input id="cif-upload" type="file"/>
+                </div>
+
+                <div class="input-container">
+                    <span class="input-name">a: </span>
+                    <input type="number" value="1" id="a-constant">
+                    <span class="input-unit">&#8491;</span>
+                    
+                </div>
+                <div class="input-container">
+                    <span class="input-name">b: </span>
+                    <input type="number" value="1" id="b-constant">
+                    <span class="input-unit">&#8491;</span>
+                </div>
+                <div class="input-container">
+                    <span class="input-name">c: </span>
+                    <input type="number" value="1" id="c-constant">
+                    <span class="input-unit">&#8491;</span>
+                </div>
+
+                <div class="input-container">
+                    <span class="input-name">&#945;: </span>
+                    <input type="number" value="90" id="alpha-constant">
+                    <span class="input-unit">&#176;</span>
+                </div>
+                <div class="input-container">
+                    <span class="input-name">&#946;: </span>
+                    <input type="number" value="90" id="beta-constant">
+                    <span class="input-unit">&#176;</span>
+                </div>
+                <div class="input-container">
+                    <span class="input-name"> &#947;: </span>
+                    <input type="number" value="90" id="gamma-constant">
+                    <span class="input-unit">&#176;</span>
+                </div>
+                
+            </div>
+
+            <button class="section-headline">
+                Crystal Basis
+            </button>
+            <div class="input-section variable-input" id="basis-input">
+                <div class="variable-container">
+                    <div class="input-container">
+                        <input class="atom-type" type="text" value ="C">
+                        <input class="x-input" type="number" min="0" max="1" value="4" step="0.1">
+                        <input class="y-input" type="number" min="0" max="1" value="5" step="0.1">
+                        <input class="z-input" type="number" min="0" max="1" value="6" step="0.1"> 
+                        <button class="remove"><p>-</p></button>
+                    </div>
+                </div>
+                <div class="input-container add-button">
+                    <button class="add" id="basis-add-button"><p>+</p></button>
+                </div>
+            </div>
+
+            <!--
+            <button class="section-headline">
+                Miller-Planes
+            </button>
+            <div class="input-section" id="miller-input">
+                <div class="input-container">
+                    <span class="input-name">hkl</span>
+                    <input id="h-input" type="number" min="0" max="30" value="1">
+                    <input id="k-input" type="number" min="0" max="30" value="1">
+                    <input id="l-input" type="number" min="0" max="30" value="1"> 
+                </div>
+            </div>
+            -->
+            <button class="section-headline">
+                Laue Settings
+            </button>
+            <div class="input-section">
+                <!--
+                <div class="input-container">
+                    <span class="max-hkl-name" >max HKL</span>
+                    <input type="number" value="5" min = "1" max = "100" id="max-hkl-input">
+                </div>
+
+                <div class="input-container">
+                    <span></span>
+                    <button id="100-hkl" style="width:81px; max-width:100px; margin-left:45px">Full</button>
+                </div>
+                -->
+
+                <div class="input-container checkbox-container">
+                    <span class="input-name">consider spectrum: </span>
+                    <input type="checkbox" id="consider-spectrum" checked>
+                </div>
+                <div class="input-container checkbox-container">
+                    <span class="input-name">consider structure factor: </span>
+                    <input type="checkbox" id="consider-structure-factor" checked>
+                </div>
+                <div class="input-container checkbox-container">
+                    <span class="input-name">normalize brightest: </span>
+                    <input type="checkbox" id="normalize-brightest" checked>
+                </div>
+                <!--
+                <div class="input-container checkbox-container">
+                    <span class="input-name">calculate Intensity: </span>
+                    <input type="checkbox" id="calculate-intensity" checked>
+                </div>
+                s-->
+                <div class="input-container checkbox-container" style="display:none">
+                    <span class="input-name">display atoms: </span>
+                    <input type="checkbox" id="display-atoms" checked>
+                </div>
+                <div class="input-container checkbox-container" style="display:none">
+                    <span class="input-name">display bounding box: </span>
+                    <input type="checkbox" id="display-bounding-box" checked>
+                </div>
+                <div class="input-container checkbox-container" style="display:none">
+                    <span class="input-name">display real basis: </span>
+                    <input type="checkbox" id="display-real-basis" checked>
+                </div>
+                <div class="input-container checkbox-container" style="display:none">
+                    <span class="input-name">display reciprocal basis: </span>
+                    <input type="checkbox" id="display-reciprocal-basis" checked>
+                </div>
+            </div>
+            <button class="section-headline">
+                Contrast Function
+            </button>
+            <div class="input-section" >
+                <div id="contrast-function">
+                    <canvas>
+                        
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="visual-container">
+            <div id="basis-view-container">
+            </div>
+            <div id="lab-view-container">
+            </div>
+            <!---->
+            <div id="laue-picture-container" >
+                <div id="laue-picture-ui">
+                    <div class="laue-picture-ui-button" id="investigate-reflection">
+                        <img src="../images/Magnifying_glass_icon.png" alt="investigate">
+                    </div>
+                    <div class="laue-picture-ui-button active" id="rotate-reflection">
+                        <img src="../images/rotate.png" alt="rotate">
+                    </div>
+                    <div class="laue-picture-ui-button" id="move-reflection">
+                        <img src="../images/move.png" alt="translate">
+                    </div>
+                    
+                    <div class="seperator"></div>
+                    
+                    <div class="laue-picture-ui-input">
+                        <span>maxHKL</span>
+                        <input style="width:50px" type="number" value="5" min = "1" max = "100" id="max-hkl-input">
+                    </div>
+
+                    <div class="laue-picture-ui-button" id="100-hkl">
+                        <span>FULL</span>
+                    </div>                  
+                    
+                    <div class="seperator"></div>
+
+                    <div class="laue-picture-ui-button" id="download-button">
+                        <img src="../images/download_icon.png" alt="download">
+                    </div>
+
+                </div>
+
+                <div id="laue-canvas-screenshot-container">
+                    <div id="laue-canvas-container" class="rotate">
+                        <canvas>
+                        
+                        </canvas>
+                    </div>
+                    
+                    <div id="laue-infobox-container">                   
+                        <div class="reflection-infobox">
+                            <p>index: 1 0 0</p>
+                            <p>2 &Theta; = 180°</p>
+                            <p>wavelength</p>
+                            <p>intensity: 0.5</p>
+                            <p># = 2</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+
+        <script type="module" src="./handle_collapsable_ui.js"></script>
+        <script type="module" src="./handle_variable_input.js"></script>
+
+        <script type="module" src="./utility.js"></script>
+        <script type="module" src="./linear_algebra.js"></script>
+        <script type="module" src="./crystal.js"></script>
+
+
+        <script type="module" src="./contrast_function.js"></script>
+        <script type="module" src="./basis_view.js"></script>
+        <script type="module" src="./lab_view.js"></script>
+        <script type="module" src="./laue_view.js"></script>
+        
+        <script type="module" src="./main.js"></script>
+
+    </body>
+</html>
