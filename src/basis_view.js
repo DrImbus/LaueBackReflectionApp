@@ -48,7 +48,8 @@ camera_pivot.rotateOnWorldAxis(new Vector3(0,0,1), Math.PI/180 * (90+45+30));
 //create renderer
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setClearColor('#233143');
-renderer.setSize(container.clientWidth, container.clientHeight);
+//renderer.setSize(500,500);
+//renderer.setSize(container.clientWidth, container.clientHeight);
 
 container.appendChild(renderer.domElement);
 
@@ -56,7 +57,10 @@ const canvas = renderer.domElement;
 
 canvas.style.width = "100%";
 canvas.style.height = "100%";
-
+container.style.width = "100%";
+container.style.height = "100%";
+camera.aspect = container.clientWidth / container.clientHeight;
+camera.updateProjectionMatrix();
 //in case of window resizing set the correct camera aspect
 window.addEventListener('resize', () => {
     //renderer.setSize(renderer.clientWidth, renderer.clientHeight, true);
@@ -64,17 +68,6 @@ window.addEventListener('resize', () => {
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
 
-    
- 
-    //container.width = container.clientWidth
-    //container.height = container.clientHeight
-
-
-    console.log(`before: ${container.clientHeight}`)
-    
-    //renderer.setSize(canvas.clientWidth,canvas.clientHeight, false);
-
-    console.log(`after: ${container.clientHeight}`)
 
 })
 
@@ -139,12 +132,12 @@ function createLighting(){
     const lights = [];
     const lightHelpers = []; 
     const lightValues = [
-        {colour: "white", intensity: 8*position_factor, dist: 12*position_factor, x: 1*position_factor, y: 0*position_factor, z: 8*position_factor},
-        {colour: "white", intensity: 6*position_factor, dist: 12*position_factor, x: -2*position_factor, y: 1*position_factor, z: -10*position_factor},
-        {colour: "white", intensity: 3*position_factor, dist: 10*position_factor, x: 0*position_factor, y: 10*position_factor, z: 1*position_factor},
-        {colour: "white", intensity: 6*position_factor, dist: 12*position_factor, x: 0*position_factor, y: -10*position_factor, z: -1*position_factor},
-        {colour: "white", intensity: 6*position_factor, dist: 12*position_factor, x: 10*position_factor, y: 3*position_factor, z: 0*position_factor},
-        {colour: "white", intensity: 6*position_factor, dist: 12*position_factor, x: -10*position_factor, y: -1*position_factor, z: 0*position_factor}
+        {colour: "white", intensity: 500*8*position_factor, dist: 12*position_factor, x: 1*position_factor, y: 0*position_factor, z: 8*position_factor},
+        {colour: "white", intensity: 500*6*position_factor, dist: 12*position_factor, x: -2*position_factor, y: 1*position_factor, z: -10*position_factor},
+        {colour: "white", intensity: 500*3*position_factor, dist: 10*position_factor, x: 0*position_factor, y: 10*position_factor, z: 1*position_factor},
+        {colour: "white", intensity: 500*6*position_factor, dist: 12*position_factor, x: 0*position_factor, y: -10*position_factor, z: -1*position_factor},
+        {colour: "white", intensity: 500*6*position_factor, dist: 12*position_factor, x: 10*position_factor, y: 3*position_factor, z: 0*position_factor},
+        {colour: "white", intensity: 500*6*position_factor, dist: 12*position_factor, x: -10*position_factor, y: -1*position_factor, z: 0*position_factor}
     ];
     for (let i=0; i<lightValues.length; i++) {
         lights[i] = new THREE.PointLight(

@@ -1,8 +1,8 @@
 {
-  "name": "my-app",
-  "productName": "my-app",
+  "name": "LaueBackReflection",
+  "productName": "LaueBackReflection",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Simulate Laue Back Reflection Images",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",

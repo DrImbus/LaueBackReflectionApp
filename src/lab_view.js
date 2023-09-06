@@ -46,7 +46,7 @@ camera_pivot.rotateOnWorldAxis(new Vector3(0,0,1), Math.PI/180 * (90+45+30));
 //create renderer
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setClearColor('#233143');
-//renderer.setSize(container.clientWidth, container.clientHeight);
+//renderer.setSize(500,500);
 
 container.appendChild(renderer.domElement);
 
@@ -54,7 +54,10 @@ const canvas = renderer.domElement;
 
 canvas.style.width = "100%";
 canvas.style.height = "100%";
-
+container.style.width = "100%";
+container.style.height = "100%";
+camera.aspect = container.clientWidth / container.clientHeight;
+camera.updateProjectionMatrix();
 //in case of window resizing set the correct camera aspect
 window.addEventListener('resize', () => {
     //renderer.setSize(renderer.clientWidth, renderer.clientHeight, true);
@@ -62,17 +65,6 @@ window.addEventListener('resize', () => {
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
 
-    
- 
-    //container.width = container.clientWidth
-    //container.height = container.clientHeight
-
-
-    console.log(`before: ${container.clientHeight}`)
-    
-    //renderer.setSize(canvas.clientWidth,canvas.clientHeight, false);
-
-    console.log(`after: ${container.clientHeight}`)
 
 })
 
@@ -106,15 +98,16 @@ function createCube(edgeLength, color=0xFFFFFF){
 
 
 function createLighting(){
+    const intensityMult = 100
     const lights = [];
     const lightHelpers = []; 
     const lightValues = [
-        {colour: 0x14D14A, intensity: 8, dist: 12, x: 1, y: 0, z: 8},
-        {colour: 0xBE61CF, intensity: 6, dist: 12, x: -2, y: 1, z: -10},
-        {colour: 0x00FFFF, intensity: 3, dist: 10, x: 0, y: 10, z: 1},
-        {colour: 0x00FF00, intensity: 6, dist: 12, x: 0, y: -10, z: -1},
-        {colour: 0x16A7F5, intensity: 6, dist: 12, x: 10, y: 3, z: 0},
-        {colour: 0x90F615, intensity: 6, dist: 12, x: -10, y: -1, z: 0}
+        {colour: 0x14D14A, intensity: intensityMult*8, dist: 12, x: 1, y: 0, z: 8},
+        {colour: 0xBE61CF, intensity: intensityMult*6, dist: 12, x: -2, y: 1, z: -10},
+        {colour: 0x00FFFF, intensity: intensityMult*3, dist: 10, x: 0, y: 10, z: 1},
+        {colour: 0x00FF00, intensity: intensityMult*6, dist: 12, x: 0, y: -10, z: -1},
+        {colour: 0x16A7F5, intensity: intensityMult*6, dist: 12, x: 10, y: 3, z: 0},
+        {colour: 0x90F615, intensity: intensityMult*6, dist: 12, x: -10, y: -1, z: 0}
     ];
     for (let i=0; i<lightValues.length; i++) {
         lights[i] = new THREE.PointLight(
