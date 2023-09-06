@@ -400,12 +400,16 @@ function addInfoBox(reflection){
        
     const infoBox = infobox_container.lastElementChild
 
-    
+    const rect = infobox_container.parentElement.getClientRects()[0]
 
+    
     //setting the screenposition of the infobox
     const screenPosition = physical2screen(reflection.screen_position)
-    infoBox.style.left=(screenPosition[0]+5+"px");
-    infoBox.style.top=(screenPosition[1]+5+"px");
+
+    console.log(screenPosition)
+
+    infoBox.style.left=(screenPosition[0]+5+rect.left+"px");
+    infoBox.style.top=(screenPosition[1]+5+rect.top+"px");
     
     
     //setting the content of the infobox
