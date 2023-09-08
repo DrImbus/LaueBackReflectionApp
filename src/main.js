@@ -299,8 +299,9 @@ cif_input.addEventListener("change", event => {
                 /**
                  * when _atom_site_type_symbol is reached the following rows contain the basis-atoms
                  */
-                if(row_content[0] == "_atom_site_type_symbol"){
-
+                
+                if(row_content[0].replace("\r","") == "_atom_site_occupancy"){
+                    console.log("reading basis")
                     /**
                      * skip every row that starts with _ because that is not yet 
                      * an atom site
