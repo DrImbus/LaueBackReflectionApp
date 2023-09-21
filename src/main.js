@@ -990,16 +990,19 @@ document.addEventListener("wheel", event => {
 
 document.addEventListener("keydown", function(event) {
 
+    if( !["ArrowRight","ArrowLeft","ArrowUp","ArrowDown"].includes(event.code)){
+        return
+    }
 
     let deltaX = 0;
     let deltaY = 0;
     let deltaZ = 0;
     
     if(event.code == "ArrowRight"){
-        deltaZ = 1
+        deltaZ = -1
     }
     if(event.code == "ArrowLeft"){
-        deltaZ = -1
+        deltaZ = 1
     }
     if(event.code == "ArrowUp"){
         deltaY = -1
